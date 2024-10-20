@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.Context
+import android.graphics.Bitmap
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 // Класс данных для хранения информации о книгах
-data class Item(val nameBooks: String, val imageResId: Int)
+data class Item(val nameBooks: String, val imageResId: Bitmap)
 
 class ItemsAdapter(private val items: List<Item>, private val context: Context): RecyclerView.Adapter<ItemsAdapter.MyViewHolder>() {
 
@@ -24,9 +25,8 @@ class ItemsAdapter(private val items: List<Item>, private val context: Context):
         val item = items[position]
         holder.nameBook.text = item.nameBooks
 
-        // Безопасно извлекаем ресурс изображения с помощью ContextCompat
-        val drawable = ContextCompat.getDrawable(context, item.imageResId)
-        holder.image.setImageDrawable(drawable)
+        // Устанавливаем битмап в ImageView
+        holder.image.setImageBitmap(item.imageResId)
     }
 
     override fun getItemCount(): Int {
